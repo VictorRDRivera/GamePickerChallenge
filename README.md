@@ -173,7 +173,7 @@ The application implements intelligent caching using Redis to optimize performan
 - **Purpose**: Caches individual game information (rarely changes)
 
 #### **4. History Cache**
-- **Duration**: 5 minutes
+- **Duration**: 3 days
 - **Key**: `history_{pageSize}_{pageNumber}_{sortBy}_{sortOrder}`
 - **Purpose**: Speeds up paginated history requests
 
