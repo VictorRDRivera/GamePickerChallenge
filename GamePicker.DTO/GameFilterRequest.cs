@@ -27,7 +27,7 @@ namespace GamePicker.Contracts
         /// Maximum RAM in GB to filter games by system requirements
         /// </summary>
         /// <example>8</example>
-        [Range(0, 128, ErrorMessage = "RAM should be between 0 and 128")]
+        [Range(1, int.MaxValue, ErrorMessage = "Ram number must be greater than 0")]
         public int? RamGb { get; set; }
     }
 }
