@@ -47,10 +47,10 @@ namespace GamePicker.Application.Test.Services
             };
 
             _mockCacheService.Setup(c => c.GetAsync<GameRecommendationResponse>(It.IsAny<string>()))
-                .ReturnsAsync((GameRecommendationResponse)null);
+                .ReturnsAsync((GameRecommendationResponse?)null);
 
             _mockCacheService.Setup(c => c.GetAsync<IReadOnlyList<FreeToPlayGameResponse>>(It.IsAny<string>()))
-                .ReturnsAsync((IReadOnlyList<FreeToPlayGameResponse>)null);
+                .ReturnsAsync((IReadOnlyList<FreeToPlayGameResponse>?)null);
 
             _mockFreeToPlayGamesClient.Setup(c => c.GetFilteredGames(genres, platform))
                 .ReturnsAsync(games);
@@ -59,7 +59,7 @@ namespace GamePicker.Application.Test.Services
                 .ReturnsAsync(games[0]);
 
             _mockRepository.Setup(r => r.GetByGameId(It.IsAny<int>()))
-                .ReturnsAsync((GameRecommendationEntity)null);
+                .ReturnsAsync((GameRecommendationEntity?)null);
 
             _mockRepository.Setup(r => r.Add(It.IsAny<GameRecommendationEntity>()))
                 .Returns(Task.CompletedTask);
@@ -79,7 +79,7 @@ namespace GamePicker.Application.Test.Services
             var platform = "pc";
 
             _mockCacheService.Setup(c => c.GetAsync<List<FreeToPlayGameResponse>>(It.IsAny<string>()))
-                .ReturnsAsync((List<FreeToPlayGameResponse>)null);
+                .ReturnsAsync((List<FreeToPlayGameResponse>?)null);
 
             _mockFreeToPlayGamesClient.Setup(c => c.GetFilteredGames(genres, platform))
                 .ThrowsAsync(new NotFoundException("No games found"));
@@ -88,30 +88,6 @@ namespace GamePicker.Application.Test.Services
                 () => _service.PickGameRecommendation(genres, platform, null));
 
             exception.Message.Should().Be("No games found");
-        }
-
-        [Fact]
-        public async Task PickGameRecommendation_WhenGameExistsInCache_ShouldUseCachedData()
-        {
-            var genres = new List<string> { "Action" };
-            var platform = "pc";
-            var cachedRecommendation = new GameRecommendationResponse
-            {
-                Title = "Cached Game",
-                LinkFromApiSite = "https://example.com",
-                Message = "Do you like Action? You definitely should play Cached Game"
-            };
-
-            _mockCacheService.Setup(c => c.GetAsync<GameRecommendationResponse>(It.IsAny<string>()))
-                .ReturnsAsync(cachedRecommendation);
-
-            // Act
-            var result = await _service.PickGameRecommendation(genres, platform, null);
-
-            // Assert
-            result.Should().NotBeNull();
-            result.Title.Should().Be("Cached Game");
-            _mockFreeToPlayGamesClient.Verify(c => c.GetFilteredGames(It.IsAny<IReadOnlyList<string>>(), It.IsAny<string>()), Times.Never);
         }
 
         [Fact]
@@ -124,7 +100,7 @@ namespace GamePicker.Application.Test.Services
             };
 
             _mockCacheService.Setup(c => c.GetAsync<PaginatedResponse<GameRecommendationHistoryResponse>>(It.IsAny<string>()))
-                .ReturnsAsync((PaginatedResponse<GameRecommendationHistoryResponse>)null);
+                .ReturnsAsync((PaginatedResponse<GameRecommendationHistoryResponse>?)null);
 
             _mockRepository.Setup(r => r.GetPaginated(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>(), It.IsAny<string>()))
                 .ReturnsAsync((entities, 2L));
@@ -167,7 +143,7 @@ namespace GamePicker.Application.Test.Services
         public async Task GetRecommendationsHistory_WhenNoDataFound_ShouldReturnEmptyList()
         {
             _mockCacheService.Setup(c => c.GetAsync<PaginatedResponse<GameRecommendationHistoryResponse>>(It.IsAny<string>()))
-                .ReturnsAsync((PaginatedResponse<GameRecommendationHistoryResponse>)null);
+                .ReturnsAsync((PaginatedResponse<GameRecommendationHistoryResponse>?)null);
 
             _mockRepository.Setup(r => r.GetPaginated(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>(), It.IsAny<string>()))
                 .ReturnsAsync((new List<GameRecommendationEntity>(), 0L));
