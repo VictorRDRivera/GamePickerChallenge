@@ -20,7 +20,7 @@ namespace GamePicker.Contracts
         /// Platform to filter games by. Options: 'pc', 'browser', or 'all'
         /// </summary>
         /// <example>pc</example>
-        [RegularExpression("^(pc|browser|all)$", ErrorMessage = "Platform should be 'pc', 'browser' or 'all'")]
+        [RegularExpression("^(?i)(pc|browser|all)$", ErrorMessage = "Platform should be 'pc', 'browser' or 'all'")]
         public string? Platform { get; set; }
 
         /// <summary>

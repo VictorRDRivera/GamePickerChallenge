@@ -33,11 +33,11 @@ namespace GamePicker.Application.Common.External
         {
             var request = new RestRequest("api/filter", Method.Get);
 
-            if (tags?.Any() == true)
-                request.AddQueryParameter("tag", string.Join('.', tags));
+            if (tags is { Count: > 0 })
+                request.AddQueryParameter("tag", string.Join('.', tags.Select(t => t.ToLowerInvariant())));
 
             if (!string.IsNullOrWhiteSpace(platform))
-                request.AddQueryParameter("platform", platform);
+                request.AddQueryParameter("platform", platform.ToLowerInvariant());
 
             var response = await _restClient.ExecuteAsync<List<FreeToPlayGameResponse>>(request);
 
