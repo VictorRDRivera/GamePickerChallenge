@@ -136,13 +136,7 @@ GET /recommendations/history?pageSize=20&pageNumber=1&sortBy=recommendedTimes&so
 
 ## 🏗️ Architecture
 
-The application follows Clean Architecture principles with the following layers:
-
-- **API Layer** (`GamePicker`): Controllers, middleware, and filters
-- **Application Layer** (`GamePicker.Application`): Business logic and services
-- **Domain Layer** (`GamePicker.Domain`): Entities and domain models
-- **Infrastructure Layer** (`GamePicker.Infastructure`): Data access and external integrations
-- **DTO Layer** (`GamePicker.DTO`): Data transfer objects and contracts
+The application follows Clean Architecture principles
 
 ## 🔧 Configuration
 
