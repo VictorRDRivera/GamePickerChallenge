@@ -134,7 +134,7 @@ namespace GamePicker.Application.Test.Services
 
             // Assert
             result.Should().NotBeNull();
-            result.Data.Should().HaveCount(2);
+            result.Items.Should().HaveCount(2);
             result.TotalCount.Should().Be(2);
         }
 
@@ -143,7 +143,7 @@ namespace GamePicker.Application.Test.Services
         {
             var cachedResponse = new PaginatedResponse<GameRecommendationHistoryResponse>
             {
-                Data = new List<GameRecommendationHistoryResponse>
+                Items = new List<GameRecommendationHistoryResponse>
                 {
                     new() { Title = "Cached Game", Genre = "Action", RecommendedTimes = 1 }
                 },
@@ -158,8 +158,8 @@ namespace GamePicker.Application.Test.Services
             var result = await _service.GetRecommendationsHistory(10, 1, "title", "asc");
 
             result.Should().NotBeNull();
-            result.Data.Should().HaveCount(1);
-            result.Data.First().Title.Should().Be("Cached Game");
+            result.Items.Should().HaveCount(1);
+            result.Items.First().Title.Should().Be("Cached Game");
             _mockRepository.Verify(r => r.GetPaginated(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<string>(), It.IsAny<string>()), Times.Never);
         }
 
@@ -175,7 +175,7 @@ namespace GamePicker.Application.Test.Services
             var result = await _service.GetRecommendationsHistory(10, 1, "title", "asc");
 
             result.Should().NotBeNull();
-            result.Data.Should().BeEmpty();
+            result.Items.Should().BeEmpty();
             result.TotalCount.Should().Be(0);
         }
     }

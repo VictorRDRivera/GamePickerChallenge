@@ -181,7 +181,7 @@ namespace GamePicker.Application.Services.GameRecommendation
 
             var response = new PaginatedResponse<GameRecommendationHistoryResponse>
             {
-                Data = historyItems,
+                Items = historyItems,
                 TotalCount = (int)totalCount,
                 PageNumber = pageNumber,
                 PageSize = pageSize,

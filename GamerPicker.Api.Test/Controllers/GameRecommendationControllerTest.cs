@@ -68,7 +68,7 @@ namespace GamerPicker.Api.Test.Controllers
             var request = new PaginationRequest { PageSize = 10, PageNumber = 1, SortBy = "title", SortOrder = "asc" };
             var expectedResult = new PaginatedResponse<GameRecommendationHistoryResponse>
             {
-                Data = new List<GameRecommendationHistoryResponse>
+                Items = new List<GameRecommendationHistoryResponse>
                 {
                     new() { Title = "Game 1", Genre = "Action", RecommendedTimes = 5 },
                     new() { Title = "Game 2", Genre = "RPG", RecommendedTimes = 3 }
@@ -88,7 +88,7 @@ namespace GamerPicker.Api.Test.Controllers
             okResult!.Value.Should().BeOfType<PaginatedResponse<GameRecommendationHistoryResponse>>();
             
             var response = okResult.Value as PaginatedResponse<GameRecommendationHistoryResponse>;
-            response!.Data.Should().HaveCount(2);
+            response!.Items.Should().HaveCount(2);
             response.TotalCount.Should().Be(2);
         }
 
@@ -98,7 +98,7 @@ namespace GamerPicker.Api.Test.Controllers
             var request = new PaginationRequest { PageSize = 10, PageNumber = 1, SortBy = "title", SortOrder = "asc" };
             var expectedResult = new PaginatedResponse<GameRecommendationHistoryResponse>
             {
-                Data = new List<GameRecommendationHistoryResponse>(),
+                Items = new List<GameRecommendationHistoryResponse>(),
                 TotalCount = 0,
                 PageNumber = 1,
                 PageSize = 10
@@ -112,7 +112,7 @@ namespace GamerPicker.Api.Test.Controllers
             result.Should().BeOfType<OkObjectResult>();
             var okResult = result as OkObjectResult;
             var response = okResult!.Value as PaginatedResponse<GameRecommendationHistoryResponse>;
-            response!.Data.Should().BeEmpty();
+            response!.Items.Should().BeEmpty();
             response.TotalCount.Should().Be(0);
         }
 
@@ -139,7 +139,7 @@ namespace GamerPicker.Api.Test.Controllers
             var request = new PaginationRequest { PageSize = pageSize, PageNumber = pageNumber, SortBy = sortBy, SortOrder = sortOrder };
             var expectedResult = new PaginatedResponse<GameRecommendationHistoryResponse>
             {
-                Data = new List<GameRecommendationHistoryResponse>(),
+                Items = new List<GameRecommendationHistoryResponse>(),
                 TotalCount = 0,
                 PageNumber = pageNumber,
                 PageSize = pageSize

@@ -11,7 +11,7 @@ namespace GamePicker.Contracts.Responses
         /// <summary>
         /// Collection of items for the current page
         /// </summary>
-        public IEnumerable<T> Data { get; init; } = Enumerable.Empty<T>();
+        public IEnumerable<T> Items { get; init; } = Enumerable.Empty<T>();
         
         /// <summary>
         /// Total number of items across all pages
