@@ -190,7 +190,7 @@ namespace GamePicker.Application.Services.GameRecommendation
                 HasPreviousPage = pageNumber > 1
             };
 
-            await _cacheService.SetAsync(cacheKey, response, TimeSpan.FromMinutes(5));
+            await _cacheService.SetAsync(cacheKey, response, TimeSpan.FromDays(3));
 
             return response;
         }
