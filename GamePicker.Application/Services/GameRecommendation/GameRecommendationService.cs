@@ -31,12 +31,6 @@ namespace GamePicker.Application.Services.GameRecommendation
         public async Task<GameRecommendationResponse> PickGameRecommendation(IReadOnlyList<string> genres, string? platform, int? ramGb)
         {
             var cacheKey = GenerateRecommendationCacheKey(genres, platform, ramGb);
-            var cachedRecommendation = await _cacheService.GetAsync<GameRecommendationResponse>(cacheKey);
-            
-            if (cachedRecommendation != null)
-            {
-                return cachedRecommendation;
-            }
 
             var filteredGames = await GetFilteredGames(genres, platform);
             var shuffledGameIds = GetShuffledGameIds(filteredGames);
