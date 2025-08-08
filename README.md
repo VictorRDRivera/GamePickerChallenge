@@ -24,7 +24,7 @@ RESTful API for suggesting games based on filters like genre, platform, and RAM 
    docker-compose up -d
    ```
 
-3. **Run the API**
+3. **Run the API Locally**
    ```bash
    cd GamePicker
    dotnet run
@@ -32,6 +32,7 @@ RESTful API for suggesting games based on filters like genre, platform, and RAM 
 
 4. **Access the API**
    - API Base URL: `http://localhost:7018`
+   - API URL Through Docker: `http://localhost:5000`
    - Swagger Documentation: `http://localhost:7018/swagger`
 
 ## 📋 API Endpoints
