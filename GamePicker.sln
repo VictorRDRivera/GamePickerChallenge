@@ -1,9 +1,23 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36401.2 d17.14
+VisualStudioVersion = 17.14.36401.2
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GamePicker", "GamePicker\GamePicker.csproj", "{480B3A08-39E8-4F74-8322-96950A03184A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GamePicker.Api", "GamePicker\GamePicker.Api.csproj", "{480B3A08-39E8-4F74-8322-96950A03184A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GamePicker", "GamePicker", "{0A00751A-E0B7-4897-8EBA-16D43C8AB483}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GamePicker.Domain", "GamePicker.Domain\GamePicker.Domain.csproj", "{7FF689C6-DD49-4CBC-9CE5-8DBBA3440FE0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GamePicker.Application", "GamePicker.Application\GamePicker.Application.csproj", "{C0F3EF0A-F862-4AD4-8FF6-E28CD6DF8C3F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{2F3C169C-B35B-4711-8810-4472F64E5A31}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GamePicker.Contracts", "GamePicker.DTO\GamePicker.Contracts.csproj", "{E47D10AF-3E5E-492E-8517-7FA206BA6021}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GamePicker.Infastructure", "GamePicker.Infastructure\GamePicker.Infastructure.csproj", "{6A9745A3-BA3E-4CE7-BB98-EAC28273AD3F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,9 +29,33 @@ Global
 		{480B3A08-39E8-4F74-8322-96950A03184A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{480B3A08-39E8-4F74-8322-96950A03184A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{480B3A08-39E8-4F74-8322-96950A03184A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7FF689C6-DD49-4CBC-9CE5-8DBBA3440FE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7FF689C6-DD49-4CBC-9CE5-8DBBA3440FE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7FF689C6-DD49-4CBC-9CE5-8DBBA3440FE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7FF689C6-DD49-4CBC-9CE5-8DBBA3440FE0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0F3EF0A-F862-4AD4-8FF6-E28CD6DF8C3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0F3EF0A-F862-4AD4-8FF6-E28CD6DF8C3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0F3EF0A-F862-4AD4-8FF6-E28CD6DF8C3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0F3EF0A-F862-4AD4-8FF6-E28CD6DF8C3F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E47D10AF-3E5E-492E-8517-7FA206BA6021}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E47D10AF-3E5E-492E-8517-7FA206BA6021}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E47D10AF-3E5E-492E-8517-7FA206BA6021}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E47D10AF-3E5E-492E-8517-7FA206BA6021}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A9745A3-BA3E-4CE7-BB98-EAC28273AD3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A9745A3-BA3E-4CE7-BB98-EAC28273AD3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A9745A3-BA3E-4CE7-BB98-EAC28273AD3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A9745A3-BA3E-4CE7-BB98-EAC28273AD3F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{480B3A08-39E8-4F74-8322-96950A03184A} = {0A00751A-E0B7-4897-8EBA-16D43C8AB483}
+		{0A00751A-E0B7-4897-8EBA-16D43C8AB483} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{7FF689C6-DD49-4CBC-9CE5-8DBBA3440FE0} = {0A00751A-E0B7-4897-8EBA-16D43C8AB483}
+		{C0F3EF0A-F862-4AD4-8FF6-E28CD6DF8C3F} = {0A00751A-E0B7-4897-8EBA-16D43C8AB483}
+		{E47D10AF-3E5E-492E-8517-7FA206BA6021} = {0A00751A-E0B7-4897-8EBA-16D43C8AB483}
+		{6A9745A3-BA3E-4CE7-BB98-EAC28273AD3F} = {0A00751A-E0B7-4897-8EBA-16D43C8AB483}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6074DF51-7C49-4ED3-90C7-02895981BD27}
