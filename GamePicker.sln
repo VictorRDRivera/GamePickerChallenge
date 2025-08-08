@@ -19,6 +19,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GamePicker.Contracts", "Gam
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GamePicker.Infastructure", "GamePicker.Infastructure\GamePicker.Infastructure.csproj", "{6A9745A3-BA3E-4CE7-BB98-EAC28273AD3F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GamerPicker.Api.Test", "GamerPicker.Api.Test\GamerPicker.Api.Test.csproj", "{BDD96EBE-1379-4DC2-BD0A-E2698438B945}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GamePicker.Application.Test", "GamePicker.Application.Test\GamePicker.Application.Test.csproj", "{E7975DCF-DA53-46DF-99F9-9B443F6471A8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +49,14 @@ Global
 		{6A9745A3-BA3E-4CE7-BB98-EAC28273AD3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6A9745A3-BA3E-4CE7-BB98-EAC28273AD3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6A9745A3-BA3E-4CE7-BB98-EAC28273AD3F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BDD96EBE-1379-4DC2-BD0A-E2698438B945}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDD96EBE-1379-4DC2-BD0A-E2698438B945}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDD96EBE-1379-4DC2-BD0A-E2698438B945}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDD96EBE-1379-4DC2-BD0A-E2698438B945}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7975DCF-DA53-46DF-99F9-9B443F6471A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7975DCF-DA53-46DF-99F9-9B443F6471A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7975DCF-DA53-46DF-99F9-9B443F6471A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7975DCF-DA53-46DF-99F9-9B443F6471A8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -56,6 +68,8 @@ Global
 		{C0F3EF0A-F862-4AD4-8FF6-E28CD6DF8C3F} = {0A00751A-E0B7-4897-8EBA-16D43C8AB483}
 		{E47D10AF-3E5E-492E-8517-7FA206BA6021} = {0A00751A-E0B7-4897-8EBA-16D43C8AB483}
 		{6A9745A3-BA3E-4CE7-BB98-EAC28273AD3F} = {0A00751A-E0B7-4897-8EBA-16D43C8AB483}
+		{BDD96EBE-1379-4DC2-BD0A-E2698438B945} = {2F3C169C-B35B-4711-8810-4472F64E5A31}
+		{E7975DCF-DA53-46DF-99F9-9B443F6471A8} = {2F3C169C-B35B-4711-8810-4472F64E5A31}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6074DF51-7C49-4ED3-90C7-02895981BD27}
