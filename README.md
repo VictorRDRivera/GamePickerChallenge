@@ -135,10 +135,6 @@ GET /recommendations/history?pageSize=20&pageNumber=1&sortBy=recommendedTimes&so
 }
 ```
 
-## 🏗️ Architecture
-
-The application follows Clean Architecture principles
-
 ## 🔧 Configuration
 
 ### Environment Variables
@@ -146,64 +142,10 @@ The application follows Clean Architecture principles
 - `REDIS_CONNECTION_STRING`: Redis connection string (default: `localhost:6379`)
 - `Proxies:FREE_GAMES_API_URL`: External games API URL (default: `https://www.freetogame.com/`)
 
-### Docker Configuration
-The `docker-compose.yaml` file sets up:
-- MongoDB instance on port 27018
-- Redis instance on port 6379
-- Database name: `gamepicker`
-- Collection: `GameRecommendations`
-
 ## 🚀 Performance & Cache
 
 ### Caching Strategy
-The application implements intelligent caching using Redis to optimize performance:
-
-#### **1. Game Recommendations Cache**
-- **Duration**: 5 minutes
-- **Key**: `recommendation_{genres}_{platform}_{ramGb}`
-- **Purpose**: Avoids recalculating recommendations for identical requests
-
-#### **2. Filtered Games Cache**
-- **Duration**: 1 hour
-- **Key**: `filtered_games_{genres}_{platform}`
-- **Purpose**: Reduces external API calls for the same filter combinations
-
-#### **3. Game Details Cache**
-- **Duration**: 24 hours
-- **Key**: `game_details_{gameId}`
-- **Purpose**: Caches individual game information (rarely changes)
-
-#### **4. History Cache**
-- **Duration**: 3 days
-- **Key**: `history_{pageSize}_{pageNumber}_{sortBy}_{sortOrder}`
-- **Purpose**: Speeds up paginated history requests
-
-#### **Cache Invalidation**
-- History cache is automatically invalidated when new recommendations are saved
-- Cache keys are designed to be unique per request parameters
-- Fallback to database/external API if cache is unavailable
-
-## 🛠️ Development
-
-### Project Structure
-```
-GamePickerChallenge/
-├── GamePicker/                 # API Layer
-├── GamePicker.Application/     # Application Layer
-├── GamePicker.Domain/          # Domain Layer
-├── GamePicker.Infastructure/   # Infrastructure Layer
-├── GamePicker.Contracts/       # DTO Layer
-└── docker-compose.yaml         # Docker configuration
-```
-
-### Key Features
-- **Standardized API Responses**: All responses follow a consistent format with `data`, `message`, `errors`, and `statusCode` fields
-- **Error Handling**: Comprehensive error handling with custom exceptions and middleware
-- **Pagination**: Database-level pagination for efficient data retrieval
-- **Sorting**: Flexible sorting options for history endpoint
-- **External API Integration**: Integration with FreeToGame API for game data
-- **MongoDB**: NoSQL database for storing game recommendations
-- **Swagger Documentation**: Auto-generated API documentation
+The application implements intelligent caching using Redis to optimize external API requests:
 
 ## 🧪 Testing
 
