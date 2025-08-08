@@ -53,7 +53,6 @@ Get a personalized game recommendation based on specified filters.
 
 #### Parameters
 - `genres` (required): Array of game genres. At least one genre is required.
-  - Options: `["Shooter", "RPG", "Strategy", "MMO", "Racing", "Sports", "Social", "Sandbox", "Open World", "Survival", "Pvp", "Pve", "Pixel Graphics", "Voxel Graphics", "Zombie", "First Person", "Third Person", "Top-Down", "3D Graphics", "2D Graphics", "Anime", "Fantasy", "Action", "Fighting", "Battle Royale", "Military", "Martial Arts", "Flight", "Low Spec", "Tank", "Space", "Sailing", "Side Scroller", "Superhero", "Permadeath", "Card", "Battle-Card", "Card Game", "Auto Battler", "Action Roguelike", "Moba", "City Builder", "Racing", "Sports", "Social", "Sandbox", "Open World", "Survival", "Pvp", "Pve", "Pixel Graphics", "Voxel Graphics", "Zombie", "First Person", "Third Person", "Top-Down", "3D Graphics", "2D Graphics", "Anime", "Fantasy", "Action", "Fighting", "Battle Royale", "Military", "Martial Arts", "Flight", "Low Spec", "Tank", "Space", "Sailing", "Side Scroller", "Superhero", "Permadeath", "Card", "Battle-Card", "Card Game", "Auto Battler", "Action Roguelike", "Moba", "City Builder"]`
 - `platform` (optional): Platform to filter games by.
   - Options: `"pc"`, `"browser"`, `"all"`
   - Default: `"all"`
