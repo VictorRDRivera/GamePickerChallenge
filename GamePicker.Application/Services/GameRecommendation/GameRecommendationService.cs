@@ -80,10 +80,8 @@ namespace GamePicker.Application.Services.GameRecommendation
 
             var filteredGames = await _freeToPlayGamesClient.GetFilteredGames(genres, platform);
 
-            if (filteredGames.Count == 0)
-            {
+            if (filteredGames is not { Count: > 0 })
                 throw new NotFoundException("No games found with the provided filters");
-            }
 
             await _cacheService.SetAsync(cacheKey, filteredGames, TimeSpan.FromHours(1));
 
