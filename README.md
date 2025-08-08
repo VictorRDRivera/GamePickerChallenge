@@ -180,13 +180,7 @@ The application implements intelligent caching using Redis to optimize performan
 #### **Cache Invalidation**
 - History cache is automatically invalidated when new recommendations are saved
 - Cache keys are designed to be unique per request parameters
-- Graceful fallback to database/external API if cache is unavailable
-
-### Performance Benefits
-- **Reduced Latency**: Cached responses return in milliseconds
-- **Lower External API Usage**: Reduces calls to FreeToGame API
-- **Better User Experience**: Faster response times for repeated requests
-- **Scalability**: Handles high traffic more efficiently
+- Fallback to database/external API if cache is unavailable
 
 ## 🛠️ Development
 
@@ -229,23 +223,3 @@ curl -X POST "http://localhost:7018/recommendation" \
 ```bash
 curl -X GET "http://localhost:7018/recommendations/history?pageSize=10&pageNumber=1&sortBy=recommendedTimes&sortOrder=desc"
 ```
-
-## 📝 Notes
-
-- The API automatically tracks game recommendations in the database
-- External API calls are cached and optimized for performance
-- All error messages are in English
-- The API supports CORS for web applications
-- Swagger documentation is available in development mode
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests if applicable
-5. Submit a pull request
-
-## 📄 License
-
-This project is licensed under the MIT License.
