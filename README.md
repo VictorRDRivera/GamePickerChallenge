@@ -148,7 +148,7 @@ The application uses SQL Server with Entity Framework Core. The database is auto
 - Server: `localhost:1433`
 - Database: `GamePicker`
 - Username: `sa`
-- Password: `YourStrong@Passw0rd`
+- Password: `1StrongPwd!!`
 
 ## 🚀 Performance & Cache
 
