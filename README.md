@@ -2,6 +2,15 @@
 
 RESTful API for suggesting games based on filters like genre, platform, and RAM requirements. The API integrates with external gaming APIs to provide personalized game recommendations.
 
+> **Note / Aviso**
+>
+> I published a second version using SQL DB + ORM to better match the challenge requirements.  
+> **This version was submitted after the official deadline.**
+>
+> - Main version (Mongo-based): https://github.com/VictorRDRivera/GamePickerChallenge
+> - SQL/ORM version (late submission): https://github.com/VictorRDRivera/GamePickerChallenge/tree/application-with-sqldb-orm
+
+
 ## 🚀 Quick Start
 
 ### Prerequisites
