@@ -8,7 +8,7 @@ RESTful API for suggesting games based on filters like genre, platform, and RAM 
 - .NET 8.0 SDK
 - Docker and Docker Compose
 - Git
-- MongoDB (provided via Docker)
+- SQL Server (provided via Docker)
 - Redis (provided via Docker)
 
 ### Running the Application
@@ -19,7 +19,7 @@ RESTful API for suggesting games based on filters like genre, platform, and RAM 
    cd GamePickerChallenge
    ```
 
-2. **Start MongoDB and Redis with Docker**
+2. **Start SQL Server and Redis with Docker**
    ```bash
    docker-compose up -d
    ```
@@ -137,9 +137,18 @@ GET /recommendations/history?pageSize=20&pageNumber=1&sortBy=recommendedTimes&so
 ## 🔧 Configuration
 
 ### Environment Variables
-- `MONGO_CONNECTION_STRING`: MongoDB connection string (default: `mongodb://localhost:27018`)
+- `ConnectionStrings__DefaultConnection`: SQL Server connection string
 - `REDIS_CONNECTION_STRING`: Redis connection string (default: `localhost:6379`)
 - `Proxies:FREE_GAMES_API_URL`: External games API URL (default: `https://www.freetogame.com/`)
+
+### Database Configuration
+The application uses SQL Server with Entity Framework Core. The database is automatically created when the application starts.
+
+**Default SQL Server Configuration:**
+- Server: `localhost:1433`
+- Database: `GamePicker`
+- Username: `sa`
+- Password: `YourStrong@Passw0rd`
 
 ## 🚀 Performance & Cache
 

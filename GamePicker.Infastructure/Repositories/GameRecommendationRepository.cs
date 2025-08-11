@@ -1,58 +1,64 @@
 ﻿using GamePicker.Application.Common.Interfaces.Persistence;
 using GamePicker.Repository.Entities;
-using MongoDB.Driver;
+using GamePicker.Infastructure.Contexts;
+using Microsoft.EntityFrameworkCore;
 
-namespace GamePicker.Repository.Repositories
+namespace GamePicker.Infastructure.Repositories
 {
     public class GameRecommendationRepository : IGameRecommendationRepository
     {
-        private readonly IMongoCollection<GameRecommendationEntity> _collection;
+        private readonly AppDbContext _context;
 
-        public GameRecommendationRepository(IMongoClient mongoClient)
+        public GameRecommendationRepository(AppDbContext context)
         {
-            var database = mongoClient.GetDatabase("gamepicker");
-            _collection = database.GetCollection<GameRecommendationEntity>("GameRecommendations");
+            _context = context;
         }
 
         public async Task Add(GameRecommendationEntity gameRecommendation)
-            => await _collection.InsertOneAsync(gameRecommendation);
+        {
+            await _context.GameRecommendations.AddAsync(gameRecommendation);
+            await _context.SaveChangesAsync();
+        }
 
         public async Task<IReadOnlyList<GameRecommendationEntity>> GetGames()
-            => await _collection.Find(FilterDefinition<GameRecommendationEntity>.Empty).ToListAsync();
+            => await _context.GameRecommendations.ToListAsync();
             
         public async Task<GameRecommendationEntity?> GetByGameId(int gameId)
-            => await _collection.Find(x => x.GameId == gameId).FirstOrDefaultAsync();
+            => await _context.GameRecommendations.FirstOrDefaultAsync(x => x.GameId == gameId);
             
         public async Task Update(GameRecommendationEntity gameRecommendation)
-            => await _collection.ReplaceOneAsync(x => x.GameId == gameRecommendation.GameId, gameRecommendation);
+        {
+            _context.GameRecommendations.Update(gameRecommendation);
+            await _context.SaveChangesAsync();
+        }
 
         public async Task<(IReadOnlyList<GameRecommendationEntity> Data, long TotalCount)> GetPaginated(int pageSize, int pageNumber, string? sortBy, string? sortOrder)
         {
-            var totalCount = await _collection.CountDocumentsAsync(FilterDefinition<GameRecommendationEntity>.Empty);
-            var filter = FilterDefinition<GameRecommendationEntity>.Empty;
-            var sort = CreateSortDefinition(sortBy, sortOrder);
+            var query = _context.GameRecommendations.AsQueryable();
             
-            var data = await _collection
-                .Find(filter)
-                .Sort(sort)
+            query = ApplySorting(query, sortBy, sortOrder);
+            
+            var totalCount = await query.CountAsync();
+            
+            var data = await query
                 .Skip((pageNumber - 1) * pageSize)
-                .Limit(pageSize)
+                .Take(pageSize)
                 .ToListAsync();
             
             return (data, totalCount);
         }
 
-        private SortDefinition<GameRecommendationEntity> CreateSortDefinition(string? sortBy, string? sortOrder)
+        static IQueryable<GameRecommendationEntity> ApplySorting(IQueryable<GameRecommendationEntity> query, string? sortBy, string? sortOrder)
         {
             var isDescending = sortOrder?.ToLower() == "desc";
             
             return sortBy?.ToLower() switch
             {
-                "title" => isDescending ? Builders<GameRecommendationEntity>.Sort.Descending(x => x.Title) : Builders<GameRecommendationEntity>.Sort.Ascending(x => x.Title),
-                "id" => isDescending ? Builders<GameRecommendationEntity>.Sort.Descending(x => x.GameId) : Builders<GameRecommendationEntity>.Sort.Ascending(x => x.GameId),
-                "createdat" => isDescending ? Builders<GameRecommendationEntity>.Sort.Descending(x => x.CreatedAt) : Builders<GameRecommendationEntity>.Sort.Ascending(x => x.CreatedAt),
-                "recommendedtimes" => isDescending ? Builders<GameRecommendationEntity>.Sort.Descending(x => x.RecommendedTimes) : Builders<GameRecommendationEntity>.Sort.Ascending(x => x.RecommendedTimes),
-                _ => Builders<GameRecommendationEntity>.Sort.Ascending(x => x.Title)
+                "title" => isDescending ? query.OrderByDescending(x => x.Title) : query.OrderBy(x => x.Title),
+                "id" => isDescending ? query.OrderByDescending(x => x.GameId) : query.OrderBy(x => x.GameId),
+                "createdat" => isDescending ? query.OrderByDescending(x => x.CreatedAt) : query.OrderBy(x => x.CreatedAt),
+                "recommendedtimes" => isDescending ? query.OrderByDescending(x => x.RecommendedTimes) : query.OrderBy(x => x.RecommendedTimes),
+                _ => query.OrderBy(x => x.Title)
             };
         }
     }

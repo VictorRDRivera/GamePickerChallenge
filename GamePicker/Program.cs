@@ -1,24 +1,22 @@
 ﻿using GamePicker.Application;
 using GamePicker.Application.Common.External;
-using GamePicker.Application.Mapping;
-using GamePicker.Infastructure;
-using GamePicker.Middleware;
-using GamePicker.Filters;
-using MongoDB.Driver;
-using RestSharp;
-using RestSharp.Serializers.Json;
-using System.Text.Json;
 using GamePicker.Application.Common.Interfaces;
 using GamePicker.Application.Common.Services;
+using GamePicker.Application.Mapping;
+using GamePicker.Filters;
+using GamePicker.Infastructure;
+using GamePicker.Infastructure.Contexts;
+using GamePicker.Middleware;
+using Microsoft.EntityFrameworkCore;
+using RestSharp;
+using RestSharp.Serializers.Json;
 using StackExchange.Redis;
+using System.Text.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 {
-    var mongoConn = builder.Configuration["MONGO_CONNECTION_STRING"] ?? "mongodb://localhost:27018";
     var redisConn = builder.Configuration["REDIS_CONNECTION_STRING"] ?? "localhost:6379";
     var apiBaseUrl = builder.Configuration["Proxies:FREE_GAMES_API_URL"] ?? "https://www.freetogame.com/";
-    
-    builder.Services.AddSingleton<IMongoClient>(_ => new MongoClient(mongoConn));
     
     builder.Services.AddStackExchangeRedisCache(options =>
     {
@@ -33,7 +31,7 @@ var builder = WebApplication.CreateBuilder(args);
     
     builder.Services
         .AddApplication()
-        .AddPersistence();
+        .AddPersistence(builder.Configuration);
 
     builder.Services.AddControllers(options =>
     {
@@ -89,18 +87,9 @@ var app = builder.Build();
 {
     using (var scope = app.Services.CreateScope())
     {
-        var mongoClient = scope.ServiceProvider.GetRequiredService<IMongoClient>();
-        var database = mongoClient.GetDatabase("gamepicker");
-        var collection = database.GetCollection<GamePicker.Repository.Entities.GameRecommendationEntity>("GameRecommendations");
-        var indexKeys = Builders<GamePicker.Repository.Entities.GameRecommendationEntity>.IndexKeys.Ascending(x => x.GameId);
-        var indexModel = new CreateIndexModel<GamePicker.Repository.Entities.GameRecommendationEntity>(indexKeys, new CreateIndexOptions { Unique = true });
-        try
-        {
-            collection.Indexes.CreateOne(indexModel);
-        }
-        catch (MongoCommandException ex) when (ex.Code == 85)
-        {
-        }
+        var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+        var strategy = db.Database.CreateExecutionStrategy();
+        await strategy.ExecuteAsync(async () => await db.Database.MigrateAsync());
     }
 
     if (app.Environment.IsDevelopment())

@@ -14,6 +14,7 @@ namespace GamePicker.Application.Mapping
         private void ExternalGamesMapping()
         {
             CreateMap<FreeToPlayGameResponse, GameRecommendationEntity>()
+                .ForMember(dest => dest.Id, opt => opt.Ignore())
                 .ForMember(dest => dest.GameId, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Title))
                 .ForMember(dest => dest.Genre, opt => opt.MapFrom(src => src.Genre))
